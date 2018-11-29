@@ -1,0 +1,9 @@
+<application>
+  <component name="UmlConfiguration">
+    <option name="categories">
+      <map>
+        <entry id="Python" categories="Methods;Fields" />
+      </map>
+    </option>
+  </component>
+</application>
