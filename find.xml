@@ -1,9 +1,9 @@
 <application>
   <component name="FindSettings">
     <option name="caseSensitive" value="true" />
-    <option name="customScope" value="File '.../src/config.py [src]'" />
-    <option name="defaultScopeName" value="File '.../src/config.py [src]'" />
+    <option name="customScope" value="File '.../src/boxes.py [src]'" />
+    <option name="defaultScopeName" value="File '.../src/boxes.py [src]'" />
     <option name="CASE_SENSITIVE_SEARCH" value="true" />
-    <option name="SEARCH_SCOPE" value="File '.../src/config.py [src]'" />
+    <option name="SEARCH_SCOPE" value="File '.../src/boxes.py [src]'" />
   </component>
 </application>
