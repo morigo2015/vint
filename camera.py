@@ -1,6 +1,8 @@
 """ camera.py - actions with video cameras"""
 
 import csv
+import time
+import logging
 from typing import List
 
 import cv2
@@ -17,10 +19,11 @@ class Camera:
         self.cam_id: int = Camera.cam_list_size
         Camera.cam_list_size += 1
         self.cam_name: str = cam_name
-        self._access_str: str = access_str
         self.read_ok: bool = False
         self.image: np.ndarray = None
+        self._access_str: str = access_str
         self._handle: cv2.VideoCapture = None
+        self.reopen_attempts_cnt: int = 0 # attempts to reopen after error
 
     def __str__(self):
         return f"Cam({self.cam_id},{self.cam_name})"
@@ -36,11 +39,23 @@ class Camera:
         """ read next frame from cam, return True if OK"""
         ret, self.image = self._handle.read()
         self.read_ok = False if ret is False or self._handle.isOpened is False else True
+        if self.read_ok:
+            self.reopen_attempts_cnt = 0 # cam is ok
         return self.read_ok
 
     def close(self):
         self._handle.release()
         self._handle = None
+
+    def reopen(self,timeout=5):
+        """ try to reopen video stream after error """
+        self.close()
+        time.sleep(timeout)
+        self.reopen_attempts_cnt += 1
+        self.open()
+        logging.debug(f'Tried to reopen {self}. Attempts counter={self.reopen_attempts_cnt}. '
+                      f'isOpened={self._handle.isOpened()}')
+        return self._handle.isOpened()
 
     @classmethod
     def init_cameras(cls):
