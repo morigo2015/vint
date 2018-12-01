@@ -1,3 +1,6 @@
+""" VServer: collect frames from all cams, show/save/monitor them and transfer to the next step
+"""
+
 import threading
 import datetime
 import time
